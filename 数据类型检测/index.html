@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <title>Untitled Document</title>
+    
+</head>
+<body>
+    <script type="text/javascript">   
+        /*
+         * param1 Array 
+         * param2 Array
+         * return true or false
+         */
+        function arraysSimilar(arr1, arr2){
+              /* if(!(arr1 instanceof Array) || !(arr2 instanceof Array))
+            {
+                return false;
+            }
+             if(arr1.length !== arr2.length)
+            {
+                return false;
+            }
+                    
+            var i=0,
+                n=arr1.length,
+                json1={},
+                json2={},
+                t1,t2,
+                type=['String','Boolean','Number','undefined','null','function','date','window'];
+           
+            for(;i<n;i++)
+            {
+               t1 = typeOf(arr1[i]),
+               t2 = typeOf(arr2[i]);
+                if(json1[t1])
+                {
+                    json1[t1]++;
+                }else
+                {
+                    json1[t1] = 1;
+                }
+                if(json2[t2])
+                {
+                    json2[t2]++;
+                }else
+                {
+                    json2[t2] = 1;
+                }
+            }
+            
+            function typeOf(ele)
+            {
+                var r;
+                if(ele === null)
+                {
+                    r="null";
+                }
+                else if(ele instanceof Array)
+                {
+                    r="array";
+                }
+                else if(ele instanceof Date)
+                {
+                    r="date";
+                }
+                else if(ele === window)
+                {
+                    r = "window";
+                }
+                else
+                {
+                    r = typeof ele;
+                }
+                return r;
+            }
+            
+            for(i=0;i<type.length;i++)
+            {
+                if(json1[type[i]] !== json2[type[i]])
+                {
+                    return false;
+                }
+              //  document.write("</br>"+json1[type[i]]+"</br>"+json2[type[i]]+"</br>")
+            }
+          // document.write("true");
+             return true;*/
+             
+             //精简的方法：将数组类型使用object.prototype判断后push到新数组中，然后使用sort将两个数组排序后对比
+            if(!Array.isArray(arr1) || !Array.isArray(arr2) ||arr1.length!=arr2.length){return false;}
+
+            var types1=[],types2=[];
+
+            for(var i in arr1){
+                types1.push(arr1[i]===null?'[object Null]':Object.prototype.toString.apply(arr1[i]));
+
+                types2.push(arr2[i]===null?'[object Null]':Object.prototype.toString.apply(arr2[i]));
+
+            }
+
+            return types1.sort().toString()==types2.sort().toString();
+
+        
+        }
+    </script>
+    <script src="testData.js"></script>
+</body>
+</html>

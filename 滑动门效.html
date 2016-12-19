@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>滑动门效果</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*
+		{
+			padding: 0;
+			margin: 0;
+		}
+		div
+		{
+			height: 511px;
+			border: 1px solid #999;
+			margin: 20px auto;
+			overflow: hidden;
+			position:relative;
+		}
+		div img
+		{
+			position: absolute;
+			left: 0;
+			display: block;
+			border-left: 1px solid #ccc;
+		}
+
+	</style>
+</head>
+<body>
+
+<div id="door">
+	<img src="img/gaaki.png" >
+	<img src="img/yami.png" >
+	<img src="img/shiyuan.png">
+	<img src="img/ajiang.png">
+</div>
+
+<script type="text/javascript">
+	window.onload=function(){
+		var box = document.getElementById("door"),
+			imgList = box.getElementsByTagName("img"),
+			imgWidth = imgList[0].offsetWidth,
+			exposeWidth = 160,
+			boxWidth = imgWidth + (imgList.length - 1)*exposeWidth;
+			box.style.width = boxWidth+"px";
+
+		reSet();
+		for(var i=1;i<imgList.length;i++)
+		{
+			(function(i){
+			imgList[i].onmouseover=function(){
+				reSet();
+				for(var j=1;j<=i;j++){
+				imgList[j].style.left = j*exposeWidth+"px";
+				}
+
+			}
+			imgList[i].onmouseout=function(){
+				reSet();
+			}
+			})(i)
+		}
+
+		function reSet()
+		{
+			for (var i = 1; i<imgList.length; i++) {
+			imgList[i].style.left = imgWidth+(i-1)*exposeWidth + "px";
+			}	
+		}
+
+
+	}
+</script>
+</body>
+</html>
+

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+	* {padding:0;margin:0;}
+	
+	#a {
+		width:200px;
+		height:200px;
+		position:relative;
+		filter:alpha(opacity:30);
+		opacity:0.3;
+		background:red;
+	}
+	</style>
+	<script type="text/javascript" >
+		window.onload=function(){
+			var box = document.getElementById("a");
+			box.onmouseover = function(){
+				change(100);
+			}
+			box.onmouseout = function(){
+				change(30);
+			}
+		}
+		
+		var alpha = 30;
+		function change(t){
+			 var timer = null;
+			
+			var box = document.getElementById("a"),
+				speed = 0;
+			
+			clearInterval(timer);
+
+				timer = setInterval(function(){
+					if(alpha > t){
+						speed = -10;
+					}else{
+						speed = 10;
+					}	
+	
+				if(alpha == t){
+					clearInterval(timer);
+				}else{				
+					alpha += speed;
+					box.style.filter = "alpha(opacity:" + alpha + ")";
+					box.style.opacity = alpha/100;
+					}
+				},30)
+			
+		}
+	
+	</script>
+</head>
+<body>
+	<div id="a">箱子</div>
+</body>
+</html>

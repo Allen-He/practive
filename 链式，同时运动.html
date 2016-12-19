@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<style>
+* {padding:0;margin:0;}
+div {width:200px;
+	height:100px;
+	border:2px solid #000;
+	background:yellow;
+	filter:alpha(opacity:30);
+	opacity:0.3;
+}
+</style>
+
+<script>
+	window.onload=function(){
+		var div = document.getElementById("a");
+	/*	div.onmouseover=function(){
+			move(div,{width:400},function(){
+				move(div,{height:300},function(){
+					move(div,{opacity:100})
+				})
+			});
+		}*/
+		div.onmouseover=function(){
+			move(div,{width:400,height:300,opacity:100});
+		}
+		div.onmouseout=function(){
+			move(div,{width:200,height:100,opacity:30});
+		}
+	
+	}
+	
+	
+	
+	function move(obj,json,fn){
+			
+		clearInterval(obj.timer);	
+		obj.timer = setInterval(function(){
+			var flag = true;
+			for(var att in json){
+			var attr = 0;
+			if(att == "opacity"){
+				attr = Math.round(parseFloat(getStyle(obj,att))*100);
+			}else{
+				attr = parseInt(getStyle(obj,att));
+			}
+			var speed = (json[att]-attr)/8;
+			speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+			if(attr != json[att]){
+				flag = false;
+			}
+			if(att == "opacity"){
+				obj.style.filter = "alpha(opacity:" + attr + speed + ")";
+				obj.style.opacity = (attr + speed)/100;
+			}else{
+				obj.style[att] = attr + speed + "px";
+			}	
+			}
+			if(flag){
+				clearInterval(obj.timer);
+				console.log("aa");
+				if(fn){
+					fn();
+					
+				}
+			}
+		},30)
+		
+	}
+	
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[sttr];
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+		
+	}
+
+</script>
+</head>
+
+
+
+<body>
+<div id="a"></div>
+</body>
+</html>

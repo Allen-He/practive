@@ -1,0 +1,34 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>onclick</title>
+<style type="text/css">
+
+</style>
+
+</head>
+<body>
+<input type="button" value="btn" id="a"/>
+
+<script>
+	function show(){
+		alert("hello")		
+	}
+	var event={
+		addHandler:function(obj,type,show){
+			if(obj.addEventListener){
+				obj.addEventListener(type,show,false);
+			}else if(obj.attachEvent){
+				obj.attachEvent('on'+type,show);
+			}else{
+				obj['on'+type] = show;
+			}
+		}
+	}
+	var click = document.getElementById("a");
+	click.onclick = show;
+
+</script>
+</body>
+</html>

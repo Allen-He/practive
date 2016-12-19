@@ -1,0 +1,28 @@
+#main
+{
+	-webkit-column-width: 202px;
+	-moz-column-width:202px;
+	-o-column-width:202px;
+	-ms-column-width:202px;
+	-webkit-column-break-inside:avoid;
+	column-break-inside: avoid;
+}
+.box
+{
+	padding: 10px 0 0 15px;
+	display: inline-block; 
+}
+.box .pic
+{
+	border:1px solid #ccc;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #ccc;
+	width: 165px;
+}
+.box .pic img
+{
+	display: block;
+	width: 165px;
+
+}

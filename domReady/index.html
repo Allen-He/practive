@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>domReady</title>
+	<meta charset="utf-8">
+	<script src="myready.js"></script>
+	<script>
+		myready(function(){
+			document.getElementById("header").style.color = 'red';
+		});
+	</script>
+</head>
+<body>
+<h1 id="header">我是天才</h1>
+<!-- 例如当网页中需要加载好几张1M以上的图片时，使用domready跟onload比较就会发现domready耗时更短，而且onload在ie浏览器下可能会失效，因为缓冲时间太短-->
+</body>
+</html>

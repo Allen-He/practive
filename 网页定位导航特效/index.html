@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网页定位导航</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*
+		{
+			padding: 0;
+			margin:0;
+		}
+		h1
+		{
+			color: blue;
+			font-size: 25px;
+			text-align:center;
+		}
+		li
+		{
+			list-style: none;
+		}
+		.content
+		{
+			width:800px;
+			margin:0 auto;
+			border:1px solid #999;
+			padding: 5px;
+			margin-bottom: 20px;
+		}
+		.content h2
+		{
+			font-size: 15px;
+			border-bottom: 2px solid #999;
+			padding: 5px;
+			margin: 8px;
+		}
+		.content li
+		{
+			display: inline;
+		}
+		.content li a img
+		{
+			width: 250px;
+			height: 250px;
+			margin: 5px;
+		}
+		#memu
+		{
+			position: fixed;
+			left: 50%;
+			margin-left: 410px;
+			top: 350px;
+		}
+		#memu li a
+		{
+			display: block;
+			text-decoration: none;
+			font-size: 18px;
+			height: 45px;
+			line-height: 45px;
+			text-align: center;
+			font-weight: bold;
+			color:#333;
+		}
+		#memu li a:hover,#memu li a.over
+		{
+			background:#0088bb;
+			color:#fff;
+		}
+
+	</style>
+	<script src="http://libs.baidu.com/jquery/1.10.2/jquery.js"></script>
+	<script type="text/javascript">
+	/*	$(document).ready(function(){
+			//监听滚动条监听事件
+			$(window).scroll(function(){
+				var scrollTop = $(document).scrollTop();
+				//console.log(scrollTop);
+				var memu = $("#memu");
+				var item = $(".content");
+				var overId = " ";
+				item.each(function(){
+					var t = $(this);
+					var height = t.offset().top; //距离文档顶部的偏移量
+					console.log(height);
+					if(scrollTop > height-200){
+						overId = "#" + t.attr("id");
+					}else{
+						return false; //若scrolltop没有大于height，则退出each遍历
+					}
+				})
+
+				var over = memu.find(".over");
+				if(overId && overId != over.attr("href")){
+					over.removeClass("over");
+					memu.find("[href="+overId+"]").addClass("over");
+				}
+			});
+		});
+		*/
+
+
+		//js实现
+
+		function getByClassName(cls){
+			var ele = document.getElementsByTagName("*");
+			var result = [];
+			for(var i = 0;i<ele.length;i++)
+			{
+				if(ele[i].className == cls)
+				{
+					result.push(ele[i]);
+				}
+			}
+			return result;
+		}
+
+		window.onload = function(){
+			window.onscroll = function(){
+				var scrollTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+				//console.log(scrollTop);
+				var memus = document.getElementById("memu").getElementsByTagName("a");
+				var item = getByClassName("content");
+				var overId = " ";
+				for(var i = 0;i<item.length;i++){
+					var _item = item[i];
+					var height = _item.offsetTop;					
+					if(scrollTop > height-200){
+						overId = "#" + _item.id;
+						//console.log(overId);
+					}else{
+						break;
+					}
+				}
+
+				if(overId){
+					
+					for(var i = 0;i<memus.length;i++){
+						var memu = memus[i];
+						var j = memu.getAttribute("href");
+						console.log(j);
+
+						if(overId == j){
+							memu.className = "over";
+						}else{
+							memu.className = " ";
+						}
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<h1>天才购物网</h1>
+	<div id="memu">
+		<ul>
+			<li><a href="#item1" class="over">1F 前田敦子</a></li>
+			<li><a href="#item2">2F 新垣结衣</a></li>
+			<li><a href="#item3">3F 长泽雅美</a></li>
+			<li><a href="#item4">4F 石原里美</a></li>
+			<li><a href="#item5">5F 有村架纯</a></li>
+		</ul>
+	</div>
+
+	<div id="item1" class="content">
+	<h2>1F 前田敦子</h2>
+		<ul>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+			<li><a href=""><img src="img/1.jpg"></a></li>
+		</ul>
+	</div>
+
+	<div id="item2"  class="content">
+	<h2>2F 新垣结衣</h2>
+		<ul>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+			<li><a href=""><img src="img/6.jpg"></a></li>
+		</ul>
+	</div>
+
+	<div id="item3" class="content">
+	<h2>3F 长泽雅美</h2>
+		<ul>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+			<li><a href=""><img src="img/7.jpg"></a></li>
+		</ul>
+	</div>
+
+	<div id="item4"  class="content">
+	<h2>4F 石原里美</h2>
+		<ul>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+			<li><a href=""><img src="img/8.jpg"></a></li>
+		</ul>
+	</div>
+
+	<div id="item5"  class="content">
+	<h2>5F 有村架纯</h2>
+		<ul>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+			<li><a href=""><img src="img/9.jpg"></a></li>
+		</ul>
+	</div>
+
+</body>
+</html>

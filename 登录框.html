@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	form,input,button
+	{
+		margin: 0;
+		padding:0;
+	}
+	#user
+	{
+		border:1px solid #999;
+		width: 210px;
+		padding: 10px;
+		background-color: #D2E9FF;
+		
+	}
+	#user input
+	{
+		display: block;
+		margin: 5px;
+		height: 37px;
+		margin: 5px auto;
+	}
+	#user button
+	{
+		display: block;
+		width: 188px;
+		height: 37px;
+		margin: 20px auto;
+		background: url(http://img.mukewang.com/539a972b00013e9102280177.jpg);
+	}
+	#user i
+	{
+		margin: 40px 20px 0 20px;
+		font-size: 13px;
+		font-style: normal;
+	}
+	#user a
+	{
+		font-size: 13px;
+		text-decoration: none;
+	}
+	.check
+	{
+		position: absolute;
+		left: 5px;
+		bottom:60px;
+
+	}
+	.loginDiv
+	{
+		
+		border-bottom: 1px solid #999;
+		position: relative;
+	}
+
+	/*要注意选择器的权重，若这里前面没有加#user，这个样式会被覆盖*/
+	#user .login  
+	{
+		background-position: 0 0;
+	}
+	#user .register
+	{
+		background-position: 0 -37px;
+	}
+</style>
+</head>
+
+<body>
+<form id="user">
+   <div class="loginDiv">
+    <input type="text" name="username1" placeholder="邮箱/手机号/用户名" />
+    <input  type="password" name="password" placeholder="请输入密码"/>
+    <input type="checkbox" class="check" /><i>下次自动登录</i>
+    <a href='#'>忘记密码?</a>
+    <button class="login"></button>
+   </div>
+    <button class="register"></button>
+</form>
+</body>
+</html>

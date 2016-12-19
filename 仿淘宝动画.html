@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>仿淘宝动画</title>
+<style>
+* {padding:0;margin:0;}
+#move {width:300px;
+	border:2px solid #ccc;
+	margin:10px auto;
+}
+#move a{display:inline-block;
+		width:58px;
+		height:25px;
+		margin:10px 17px;
+		border:1px solid #ddd;
+		border-radius:3px;
+		background-color:#fff;
+		text-align:center;
+		color:#9c9c9c;
+		padding-top:40px;
+		position:relative;
+		font-size:12px;
+		text-decoration:none;
+		line-height:25px;
+		overflow:hidden;
+
+}
+#move a i{top:15px;
+		  position:absolute;
+		  left:0;
+		  display:inline-block;
+		  width:100%;
+		  text-align:center;
+		  filter:alpha(opacity:100);
+		  opacity:1;
+}
+#move a:hover{
+		color:#f00;
+}
+#move img{
+		border:none;
+}
+
+</style>
+
+<script>
+	window.onload=function(){
+		var odiv=document.getElementById("move"),
+			list=odiv.getElementsByTagName("a");
+			for(var i = 0;i<list.length;i++){
+			list[i].onmouseover=function(e)			
+			{
+				e = e || window.event;
+				var reltg = e.relatedTarget ? e.relatedTarget : e.fromElement;
+				while(reltg && reltg != this) {reltg = reltg.parentNode;}
+				if(reltg != this){
+					var _this = this.getElementsByTagName("i")[0];				
+					move(_this,{top:-25,opacity:0},function(){
+						_this.style.top = 30+"px";					
+						move(_this,{top:15,opacity:100});
+					});
+					console.log("kaishi");
+					}
+			}
+			}
+	
+	}
+	
+	
+	
+	function move(obj,json,fn){
+			
+		clearInterval(obj.timer);	
+		obj.timer = setInterval(function(){
+			var flag = true;
+			for(var att in json){
+				var attr = 0;
+				if(att == "opacity"){
+					attr = Math.round(parseFloat(getStyle(obj,att))*100);
+				}else{
+					attr = parseInt(getStyle(obj,att));
+				}
+				var speed = (json[att]-attr)/8;
+				speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+				if(attr != json[att]){
+					flag = false;
+				}
+				if(att == "opacity"){
+					obj.style.filter = "alpha(opacity:" + attr + speed + ")";
+					obj.style.opacity = (attr + speed)/100;
+				}else{
+					obj.style[att] = attr + speed + "px";
+				}	
+			}
+			if(flag){
+				clearInterval(obj.timer);
+				console.log("aa");
+				if(fn){
+					fn();
+					
+				}
+			}
+		},30)
+		
+	}
+	
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[sttr];
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+		
+	}
+
+</script>
+</head>
+
+
+
+<body>
+<div id="move">
+<a href="#"><i><img src="img/1.png" /></i><p>淘宝</p></a>
+<a href="#"><i><img src="img/2.png" /></i><p>天猫</p></a>
+<a href="#"><i><img src="img/3.png" /></i><p>聚合会</p></a>
+<a href="#"><i><img src="img/4.png" /></i><p>支付宝</p></a>
+<a href="#"><i><img src="img/5.png" /></i><p>阿里</p></a>
+<a href="#"><i><img src="img/6.png" /></i><p>去哪儿</p></a>
+
+</div>
+</body>
+</html>

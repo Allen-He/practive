@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bing搜索</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="ID=edge"> <!-- 兼容低版本ie浏览器 -->
+	<style type="text/css">
+		*
+		{
+			margin: 0;
+			padding: 0;
+		}
+		body
+		{
+			background: #333;
+		}
+		#bg-img
+		{
+			background-image: url(img/river.jpg);
+			width: 1228px;
+			height: 690px;
+			margin:0 auto;
+			position: relative;
+		}
+		#logo
+		{
+			background-image: url(img/logo.png);
+			width: 107px;
+			height: 53px;
+			float: left;
+			margin: -6px 18px 0 0;
+		}
+		form
+		{
+			float: left;
+			background-color: #fff;
+			padding: 5px;
+		}
+		.search-text
+		{
+			border:0;
+			height: 29px;
+			line-height: 29px;
+			float: left;
+			outline: none;
+			width: 350px;
+			font-size: 18px;
+		}
+		.search-button
+		{
+			border:0;
+			background-image: url(img/search-button.png);
+			width: 29px;
+			height: 29px;
+			float: left;
+		}
+		#search-box
+		{
+			position: absolute;
+			top: 200px;
+			left: 300px;
+		}
+		.suggest
+		{
+			width: 388px;
+			background-color: #fff;
+			border:1px solid #999;
+			position: absolute;
+			top:239px;
+			left: 425px;
+			display: none;
+		}
+		.suggest ul
+		{
+			list-style: none;
+		}
+		.suggest ul li
+		{
+			padding: 3px;
+			font-size: 14px;
+			line-height: 25px;
+			cursor: pointer;
+		}
+		.suggest ul li:hover
+		{
+			background-color: #e5e5e5;
+			text-decoration: underline;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="bg-img">
+		<div id="search-box">
+			<div id="logo">			
+			</div>
+			<form id="search-form">
+				<input type="text" name="sreach" class="search-text">
+				<input type="submit" name="submit" class="search-button" value="">
+			</form>
+		</div>
+		<div class="suggest" id="search-suggest">
+			<ul id="search-result">
+				<li>搜索结果1</li>
+				<li>搜索结果2</li>
+			</ul>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.10.2/jquery.js"></script>
+	<script type="text/javascript">
+	/**
+		var $text = $(".search-text");
+		$text.on("keyup",function(){			
+			var textResult = $text.val();
+			var result = $("#search-result");
+			$.get("http://cn.bing.com/AS/Suggestions?pt=page.home&mkt=zh-cn&qry="+textResult+"&cp=1&o=hs&cvid=4FC6689048AB4931AD82FF1BE98081D6",function(d){
+					var d = d;
+					result.html(d);
+			},"html");
+			$("#search-suggest").show();
+		});
+		$("#search-result").on("click","li",function(){
+			var key = $(this).text();
+			location.href = "http://cn.bing.com/search?q="+key;
+		});
+		$("body").click(function(){
+			$("#search-suggest").hide();
+		});
+	**/
+
+		var text = getClass("search-form","search-text")[0];
+
+
+		
+			text.onkeyup=function(){
+				var textResult = text.value;
+				var result = document.getElementById("search-result");
+				ajaxGet("http://cn.bing.com/AS/Suggestions?pt=page.home&mkt=zh-cn&qry="+textResult+"&cp=1&o=hs&cvid=4FC6689048AB4931AD82FF1BE98081D6",function(d){
+					result.innerHTML = d;
+				});
+				var suggest = document.getElementById("search-suggest");
+				suggest.style.display = "block";
+			}
+
+
+			document.onclick = function(){
+				var suggest = document.getElementById("search-suggest");
+				suggest.style.display = "none";
+			}
+		
+
+			var result = document.getElementById("search-result");
+			result.onclick=function(e){
+				var e = e || window.event;
+				if(e.target.nodeName.toLowerCase() == "div"){
+					var key = e.target.innerHTML;
+					location.href = "http://cn.bing.com/search?q="+key;
+				console.log("aaaa");
+				}	
+				
+			}
+
+
+		function ajaxGet(url,callback){
+			var xhr = null;
+			if(window.XMLHttpRequest){
+				xhr = new window.XMLHttpRequest();
+			}else if(window.ActiveXobject){
+				xhr = new ActiveXobject("Msxml2.XMLHTTP");
+			}
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					callback(xhr.responseText);
+				}
+			}
+			xhr.open("get",url,true);
+			xhr.send(null);
+		}
+
+		function getClass(par,cla){
+			var parent = document.getElementById(par);
+			var claNode = parent.getElementsByTagName("*");
+			var result = [];
+			for(var i = 0;i<claNode.length;i++)
+			{
+				if(claNode[i].className == cla)
+				{
+					result.push(claNode[i]);
+				}
+			}
+			return result;
+		}
+	</script>
+</body>
+</html>

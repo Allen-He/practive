@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<title>缓冲动画</title>
+	<meta charset="utf-8">
+	<style>
+	* {padding:0;
+		margin:0;}
+	#a {
+		width:200px;
+		height:200px;
+		background:red;
+		position:relative;
+		left:-200px;
+		top:0;
+	}
+	
+	#a span {
+		width:20px;
+		height:50px;
+		background:blue;
+		position:absolute;
+		left:200px;
+		top:75px;
+	}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oDrag = document.getElementById("a");
+			oDrag.onmouseover = function(){
+				move(0);
+			}
+			oDrag.onmouseout = function(){
+				move(-200);
+			}
+		}
+		var timer = null;
+		function move(t){
+			var oDrag = document.getElementById("a")
+				speed = 0;
+			clearInterval(timer);
+
+			timer = setInterval(function(){	
+				speed = (t-oDrag.offsetLeft)/20;
+				speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+				if(oDrag.offsetLeft == t){
+					clearInterval(timer);
+				}else{
+				oDrag.style.left = oDrag.offsetLeft + speed + "px";	
+					}
+			},30)
+			
+		}
+		
+
+	</script>
+</head>
+<body>
+<div id="a"><span id="share">s</span></div>
+</body>
+</html>

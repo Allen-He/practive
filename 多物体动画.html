@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<style>
+* {padding:0;margin:0;}
+ul {position:relative;
+	width:204px;
+	height:500px;
+	top:80px;
+	}
+ul li {list-style:none;
+		width:200px;
+		height:50px;
+		background:yellow;
+		margin-bottom:50px;
+		border:2px solid #000;
+		filter:alpha(opacity:30);
+		opacity:0.3;
+}
+</style>
+
+<script>
+	window.onload=function(){
+	/*
+	var aLi = document.getElementsByTagName("li");
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].timer = null;
+			aLi[i].onmouseover=function(){
+				move(this,300);
+			}
+			aLi[i].onmouseout=function(){
+				move(this,200);
+			}
+		}
+		*/	
+	var Li1 = document.getElementById("li1"),
+		Li2 = document.getElementById("li2"),
+		Li3 = document.getElementById("li3");
+	Li1.onmouseover = function(){
+		move(this,300,"height");
+	}
+	Li1.onmouseout = function(){
+		move(this,50,"height");
+	}
+	
+	Li2.onmouseover = function(){
+		move(this,300,"width");
+	}
+	Li2.onmouseout = function(){
+		move(this,200,"width");
+	}
+	
+	Li3.onmouseover = function(){
+		move(this,100,"opacity");
+	}
+	Li3.onmouseout = function(){
+		move(this,30,"opacity");
+	}
+	
+	}
+	
+	
+	
+	function move(obj,t,att){
+		clearInterval(obj.timer);	
+		obj.timer = setInterval(function(){
+			var attr = 0;
+			if(att == "opacity"){
+				attr = Math.round(parseFloat(getStyle(obj,att))*100);
+			}else{
+				attr = parseInt(getStyle(obj,att));
+			}
+			var speed = (t-attr)/8;
+			speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+			if(attr == t){
+				clearInterval(obj.timer);
+			}else{
+				if(att == "opacity"){
+					obj.style.filter = "alpha(opacity:" + attr + speed + ")";
+					obj.style.opacity = (attr + speed)/100;
+				}else{
+					obj.style[att] = attr + speed + "px";
+				}
+			}
+			
+		},30)
+	}
+	
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[sttr];
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+		
+	}
+
+</script>
+</head>
+
+
+
+<body>
+<ul>
+	<li id="li1"></li>
+	<li id="li2"></li>
+	<li id="li3"></li>
+</ul>
+</body>
+</html>

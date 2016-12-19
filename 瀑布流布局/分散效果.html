@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.10.2/jquery.js"/></script>
+<title>带有分散效果的瀑布流</title>
+<style type="text/css">
+    *{padding: 0;margin:0;}
+    #main{
+        position: relative;
+        margin: 0 auto;
+    }
+    .box{
+        padding: 15px 0 0 15px;
+        position: absolute;
+    }
+    .pic{
+        padding: 10px;
+        border:1px solid #ccc;
+        box-shadow: 0 0 6px #ccc;
+        border-radius: 5px;
+    }
+    .box img{
+        width:162px;
+        height:auto;
+    }
+</style>
+<script>
+$(window).on( "load", function(){
+   // 初始化数组排列
+   var $boxs = $("#main > div");
+   var boxW = $boxs.eq(0).outerWidth();
+   var boxH = $boxs.eq(0).outerHeight();
+   var cols = Math.floor($(window).width() / boxW);
+   var height = Math.floor($(window).height() / 2);
+   $boxs.each(function(index,value){
+    //这个css是精髓，利用随机数随机排列图片的位置，但总在屏幕中央
+        $boxs.eq(index).css({
+            "top" : height,
+            "left" : "50%",
+            "margin-top" : -Math.floor(boxH/2)+(Math.floor(Math.random()*10)<5?-1:1)*Math.floor(Math.random()*200),
+            "margin-left" : -Math.floor(boxW/2)+(Math.floor(Math.random()*10)<5?-1:1)*Math.floor(Math.random()*200)
+        });      
+   });
+    setTimeout(waterfall,1000);
+    var data = [{"src":"1.jpg"},{"src":"2.jpg"},{"src":"3.jpg"},{"src":"4.jpg"},{"src":"5.jpg"},
+                 {"src":"6.jpg"},{"src":"7.jpg"},{"src":"8.jpg"},{"src":"9.jpg"}];
+    window.onscroll=function(){
+       // 拖动滚动条时
+       if(checkscrollside()){
+            $.each(data,function(index,value){
+                var oBox = $("<div>").addClass("box").appendTo($("#main"));
+                var oPic = $("<div>").addClass("pic").appendTo(oBox);
+                $("<img>").attr("src","img/" + value.src).appendTo(oPic);
+            });
+            waterfall();
+       }
+     }
+});
+function waterfall(){
+ // 计算及定位数据块显示分散效果
+   var $boxs = $("#main > div");
+   var boxW = $boxs.eq(0).outerWidth();
+   var cols = Math.floor($(window).width() / boxW);
+   var lineH = [];
+   $("#main").css("width",boxW*cols);
+   $boxs.each(function(index,value){
+        if(index<cols){
+            lineH.push($boxs.eq(index).outerHeight());
+            //console.log(lineH);
+             $boxs.eq(index).animate({
+                "top" : 0,
+                "left" : boxW*index,
+                "margin-top" : 0,
+                "margin-left" : 0
+            },700); 
+        }else{
+            var min = Math.min.apply(null,lineH);
+            //console.log(min);
+            var minIndex = $.inArray(min,lineH);
+           // console.log(minIndex);
+            $boxs.eq(index).animate({
+                "top" : min+"px",
+                "left" : boxW*minIndex+"px",
+                "margin-top" : 0,
+                "margin-left" : 0
+            },700);
+
+           // console.log($boxs.eq(index).css("margin-left"));
+            lineH[minIndex] += $boxs.eq(index).outerHeight();
+        }
+   });
+
+}
+
+function checkscrollside(){
+  // 检测是否具备了加载数据块的条件
+    var lastbox = $("#main > div").last();
+    var lastboxHeight = lastbox.offset().top + Math.floor(lastbox.outerHeight()/2);
+    var height = $(window).height();
+    var top = $(window).scrollTop();
+    return (lastboxHeight < height+top) 
+}
+
+</script>
+</head>
+<body>
+<div id="main">
+    <div class="box">
+        <div class="pic">
+            <img src="img/ajiang.png">  
+        </div>  
+    </div>  
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu10.png">    
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/gaaki.png">   
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu1.png">     
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/shiyuan.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu.png">  
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/yami.png">
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu2.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu3.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu4.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu5.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu6.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu7.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu8.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu9.png"> 
+        </div>  
+    </div><div class="box">
+        <div class="pic">
+            <img src="img/yami.png">
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu2.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu3.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu4.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu5.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu6.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu7.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu8.png"> 
+        </div>  
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="img/mayuyu9.png"> 
+        </div>  
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+	<title>速度动画</title>
+	<meta charset="utf-8">
+	<style>
+	* {padding:0;
+		margin:0;}
+	#a {
+		width:200px;
+		height:200px;
+		background:red;
+		position:relative;
+		left:-200px;
+		top:0;
+	}
+	
+	#a span {
+		width:20px;
+		height:50px;
+		background:blue;
+		position:absolute;
+		left:200px;
+		top:75px;
+	}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oDrag = document.getElementById("a");
+			oDrag.onmouseover = function(){
+				move(0);
+				console.log("zz");
+			}
+			oDrag.onmouseout = function(){
+				move(-200);
+				console.log("cc");
+			}
+		}
+		var timer= null;
+		function move(t){
+		 
+			var oDrag = document.getElementById("a"),
+				speed = 0;
+			clearInterval(timer);
+
+			timer = setInterval(function(){	
+				if(oDrag.offsetLeft > t){
+					speed = -10;
+				}else{
+					speed = 10;
+				}
+				if(oDrag.offsetLeft == t){
+					clearInterval(timer);
+
+				}else{
+				oDrag.style.left = oDrag.offsetLeft + speed + "px";		
+				console.log(timer);
+					}
+			},30)
+			
+		}
+		
+
+	</script>
+</head>
+<body>
+<div id="a"><span id="share">s</span></div>
+</body>
+</html>
+
+
+
+/**
+timer设置为全局变量正常，设置为局部变量不正常的原因：
+主要因为事件冒泡，在move函数内定位timer，会来回触发onmouseover跟onmouseout，导致计时器抢资源出错而出现来回震动。可用断点调试
+http://www.cnblogs.com/jingh/p/5771479.html
+2016/10/16
+**/

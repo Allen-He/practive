@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>慕课</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*
+		{
+			margin:0;
+			padding: 0;
+		}
+		.bg
+		{
+			width: 974px;
+			margin: 0 auto;
+		}
+		.bg .title .title_img
+		{	
+			width: 200px;
+			height: 70px;
+			float: left;
+		}
+		.bg .title ul,.course ul
+		{
+			list-style: none;
+			float: left;
+		}
+		.bg .title ul li,.course ul li
+		{
+			float: left;
+		}
+		.bg .title ul li a
+		{
+			text-decoration: none;
+			font-size: 16px;
+			color: #000;
+			display: block;
+			text-align: center;
+			width: 80px;
+			height: 70px;
+			line-height: 70px;
+			margin: 0 10px;
+		}
+		.bg .title ul li:hover
+		{
+			background-color: #BD3847
+		}
+		.banner
+		{
+			position: relative;
+			width: 974px;
+			height: 320px;
+			overflow: hidden;
+		}
+		.banner img
+		{
+			position: absolute;
+			display: none;
+			height: 310px;
+		}
+		.banner .imgOver
+		{
+			display: block;
+		}
+		.banner .ctrl
+		{
+			height: 10px;
+			width: 974px;
+			position: absolute;
+			top: 310px;
+		}
+		.banner .ctrl .btn
+		{
+			width: 323px;
+			height: 10px;
+			background-color: #999;
+			float: left;
+			border-right: 1px solid #fff;
+			cursor: pointer;
+		}
+		.banner .ctrl .btn:last-child
+		{
+			border-right: 2px solid #999;
+		}
+		.banner .ctrl .current
+		{
+			background-color: #000;
+		}
+		.sorcll
+		{
+			margin: 30px 0;
+			height: 40px;
+		}
+		.sorcll .sorcll_l
+		{
+			width: 20%;
+			height: 40px;
+			background-color: red;
+			float: left;
+			text-align: center;
+			line-height: 40px;
+		}
+		.sorcll .sorcll_r
+		{
+			width: 80%;
+			height: 40px;
+			background-color: #3b3b3b;
+			float: left;
+			text-indent: 2em;
+			line-height: 40px;
+		}
+		.course
+		{
+			overflow: hidden;
+		}
+		.course ul li img
+		{
+			width: 320px;
+			height: 100px;
+			margin-right: 5px;
+		}
+		.course ul li:last-child img
+		{
+			width: 322px;
+			margin-right: 2px;
+		}
+		.course ul li .course_t
+		{
+			display: block;
+			text-align: center;
+			width: 320px;
+		}
+		.list
+		{
+			margin-top: 20px;
+			overflow: hidden;
+		}
+		.list .list_l,.list .list_m,.list .list_r
+		{
+			width: 320px;
+			float: left;
+			margin-right: 3px;
+		}
+		.list .list_title
+		{
+			width: 300px;
+			height: 30px;
+			background-color: #BD3847;
+			color: #fff;
+			line-height: 30px;
+			padding-left: 20px;
+		}
+		.list .list_l .date
+		{
+			height: 40px;
+			width: 30px;
+			background-color: #BD3847;
+			text-align: center;
+			line-height:20px;
+			border-radius: 4px;
+			font-size: 8px;
+			margin:6px;
+			padding: 10px 5px;
+			color: #fff;
+			float: left;
+		}
+		.list ul
+		{
+			list-style: none;
+		}
+		.list ul li
+		{
+			width: 300px;
+			margin-top: 10px;  /*此处如果不加margin-top，date浮动会出现混乱*/
+		}
+		.list .list_l ul li h4,.list .list_l ul li p
+		{
+			width: 240px;
+			font-size: 10px;
+			display: inline-block;
+			margin:6px 3px;
+		}
+		.list .list_r address
+		{
+			font-style: normal;
+			margin-top: 20px;
+		}
+		.flooer
+		{
+			height: 30px;
+			background-color: #b3b3b3;
+			margin-top: 10px;
+		}
+		.flooer p
+		{
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="title">
+			<div class="title_img"><img src="http://img.mukewang.com/53edadad0001efe202000070.jpg"></div>
+			<ul>
+				<li><a href="#">首页</a></li>
+				<li><a href="#">产品特色</a></li>
+				<li><a href="#">解决方案</a></li>
+				<li><a href="#">产品价格</a></li>
+				<li><a href="#">帮助中心</a></li>
+				<li><a href="#">关于我们</a></li>
+			</ul>
+		</div> <!-- title end -->
+		
+		<div class="banner" id="banner">	
+			<img id="img_1" class="imgOver" src="http://img.mukewang.com/53edad1600019ae910000310.jpg">					
+			<img id="img_2" src="http://img.mukewang.com/53edad2c0001b61310000314.jpg">
+			<img id="img_3" src="http://img.mukewang.com/53edad3e0001afad10000318.jpg">
+			<div class="ctrl">
+				<span class="btn current" id="btn_1"></span>
+				<span class="btn" id="btn_2"></span>
+				<span class="btn" id="btn_3"></span>
+			</div>
+		</div><!-- banner end -->
+
+		<div class="sorcll">
+			<div class="sorcll_l">滚动新闻</div>
+			<div class="sorcll_r">这是滚动新闻</div>
+		</div><!-- sorcll end -->
+
+		<div class="course">
+			<ul>
+				<li>
+					<img src="http://img.mukewang.com/53edad54000119fb03300130.jpg">
+					<span class="course_t">玩转bootstrap</span>
+				</li>
+				<li>
+					<img src="http://img.mukewang.com/53edad690001260a03300130.jpg">
+					<span class="course_t">企业网站案例</span>
+				</li>
+				<li>
+					<img src="http://img.mukewang.com/53edad7a0001cde803300130.jpg">
+					<span class="course_t">javascript基础</span>
+				</li>
+			</ul>
+		</div><!-- course end -->
+
+		<div class="list">
+			<div class="list_l">
+				<div class="list_title">新闻中心</div>
+				<ul>
+					<li>
+						<div class="date">8月<br>13日</div>
+						<h4>学习计划之"Android攻城狮初养成"</h4>
+						<p>想成为Android攻城狮?想开发一款专属App?没有任何基础的你,应该从何学起?</p>
+					</li>
+					<li>
+						<div class="date">8月<br>13日</div>
+						<h4>学习计划之"Android攻城狮初养成"</h4>
+						<p>想成为Android攻城狮?想开发一款专属App?没有任何基础的你,应该从何学起?</p>
+					</li>
+					<li>
+						<div class="date">8月<br>13日</div>
+						<h4>学习计划之"Android攻城狮初养成"</h4>
+						<p>想成为Android攻城狮?想开发一款专属App?没有任何基础的你,应该从何学起?</p>
+					</li>
+				</ul>
+			</div>
+			<div class="list_m">
+				<div class="list_title">热门活动</div>
+				<ul>
+					<li><img src="http://img.mukewang.com/53edacdd0001b8e804820302.jpg" width="300px" height="100px"></li>
+					<li>我爱前端技术</li>
+					<li>我爱前端技术</li>
+					<li>我爱前端技术</li>
+					<li>我爱前端技术</li>
+				</ul>
+			</div>
+			<div class="list_r">
+				<div class="list_title">联系我们</div>
+					<address>
+						联系我们<br />
+						讲师招募：邹同学<br />
+						电话：18888888888<br />
+						QQ:4744373X<br />
+				        Email:4744373X@qq.com<br />
+					</address>
+					<address>
+						联系我们<br />
+						讲师招募：邹同学<br />
+						电话：18888888888<br />
+						QQ:4744373X<br />
+				        Email:4744373X@qq.com<br />
+					</address>
+			</div>	
+		</div><!-- list end -->
+
+		<div class="flooer">
+			<p>Copyright © 2013 imooc.com All Rights Reserved 京ICP备 13046642号-2</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function banner(ele){
+			var id = ele.id.split("_")[1];
+			console.log(id);
+			var img = document.getElementById("img_"+id);
+			var btns = document.getElementsByClassName("btn");
+			var banner = document.getElementById("banner");
+			var imgs = banner.getElementsByTagName("img");
+			if(!/current/.test(ele.className)){
+				for(var i = 0;i<imgs.length;i++){
+					imgs[i].className = "";
+					btns[i].className = "btn";
+				}
+				img.className = "imgOver";
+				ele.className += " current";
+			}
+			
+		}
+
+		var btn = document.getElementsByClassName("btn");
+		//console.log(btn);
+		for(var i = 0;i<btn.length;i++){
+			console.log("aaa");
+			btn[i].onmouseover=function(){
+				banner(this);
+
+			}
+		}
+	</script>
+</body>
+</html>

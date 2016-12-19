@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>isElement</title>
+</head>
+<body>
+<div id="test">aaa</div><!-- 注释节点-->
+
+<script type="text/javascript">
+	var box = document.getElementById("test");
+	function isElement(obj){
+		if(obj && obj.nodeType === 1)
+		{	
+			if(window.Node && (obj instanceof Node))
+			{
+			return true;
+			}
+				try
+				{
+					box.creatNode(obj);
+					box.removeNode(obj);
+				}catch(e)
+				{
+					return false;
+				}
+				return true;			
+		}
+		return false;
+	}
+	var a = {nodeType : 1};
+	console.log(isElement(document.getElementById("test")));
+	console.log(isElement(document.getElementById("test").nextSibling));
+	console.log(isElement(a));
+</script>
+
+</body>
+</html>
