@@ -186,7 +186,7 @@ console.log(getObjectLength(obj)); // 3
 
 // 判断是否为邮箱地址
 function isEmail(emailStr) {
-    return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+(.[a-zA-Z0-9])+$/.test(emailStr) //^表示开头，$表示结尾,+表示至少有一个
+    return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]{2,4}$/.test(emailStr)
 }
 
 // 判断是否为手机号
