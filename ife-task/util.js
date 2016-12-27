@@ -193,3 +193,67 @@ function isEmail(emailStr) {
 function isMobilePhone(phone) {
     return /^1[0-9]{10}$/.test(phone)
 }
+
+
+//task 2_3
+// 为element增加一个样式名为newClassName的新样式
+function addClass(element, newClassName) {
+	var reg = new RegExp(newClassName);
+	if(!reg.test(element.className)){
+    return element.className += " "+ newClassName;
+	}else{
+		return element.className;
+	}
+}
+
+// 移除element中的样式oldClassName
+function removeClass(element, oldClassName) {
+   var cls = element.className.replace(oldClassName,"");
+   return element.className = cls;
+}
+
+// 判断siblingNode和element是否为同一个父元素下的同一级的元素，返回bool值
+function isSiblingNode(element, siblingNode) {
+   return  element.parentNode == siblingNode.parentNode;
+}
+
+// 获取element相对于浏览器窗口的位置，返回一个对象{x, y}
+function getPosition(element) {
+	var parent = element.offsetParent;
+	var x = element.offsetLeft;
+	var y = element.offsetTop;
+	while(parent !== null){
+		x += parent.offsetLeft;
+		y += parent.offsetTop;
+		parent = parent.offsetParent;
+	}
+	var pos = {
+		posX : x,
+		posY : y,
+	}
+	return pos;
+}
+
+
+
+// 实现一个简单的Query
+function $(selector) {
+
+}
+
+// 可以通过id获取DOM对象，通过#标示，例如
+$("#adom"); // 返回id为adom的DOM对象
+
+// 可以通过tagName获取DOM对象，例如
+$("a"); // 返回第一个<a>对象
+
+// 可以通过样式名称获取DOM对象，例如
+$(".classa"); // 返回第一个样式定义包含classa的对象
+
+// 可以通过attribute匹配获取DOM对象，例如
+$("[data-log]"); // 返回第一个包含属性data-log的对象
+
+$("[data-time=2015]"); // 返回第一个包含属性data-time且值为2015的对象
+
+// 可以通过简单的组合提高查询便利性，例如
+$("#adom .classa"); // 返回id为adom的DOM所包含的所有子节点中，第一个样式定义包含classa的对象
